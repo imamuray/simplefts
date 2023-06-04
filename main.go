@@ -6,7 +6,6 @@ import (
 	"regexp"
 	"strings"
 	"time"
-	"unicode"
 )
 
 // 単純な文字列一致で検索
@@ -31,22 +30,6 @@ func searchRegexp(docs []document, term string) []document {
 		}
 	}
 	return r
-}
-
-// 単語境界でテキストを分割する
-func tokinize(text string) []string {
-	return strings.FieldsFunc(text, func(r rune) bool {
-		return !unicode.IsLetter(r) && !unicode.IsNumber(r)
-	})
-}
-
-// テキストをトークンに分割
-func analyze(text string) []string {
-	tokens := tokinize(text)
-	tokens = lowercaseFilter(tokens)
-	tokens = stopwordFilter(tokens)
-	// ステミング入れるならここ
-	return tokens
 }
 
 // 転置インデックス
